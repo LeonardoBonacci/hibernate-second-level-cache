@@ -18,9 +18,9 @@ public class Foo {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String name;
+    private String bar;
 
-    public Foo(final String name) {
-        this.name = name;
+    public Foo(final String bar) {
+        this.bar = bar;
     }
 }
