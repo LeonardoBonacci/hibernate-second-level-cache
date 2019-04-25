@@ -1,0 +1,21 @@
+version: '2.1'
+
+services:
+
+  cacher:
+    image: cacher
+    build: .
+    depends_on:
+      db:
+        condition: service_started
+    ports:
+      - 8070-8080:8080
+
+  db:
+    image: postgres:latest
+    container_name: the-postgres
+    environment:
+      POSTGRES_USER: demo 
+      POSTGRES_PASSWORD: pw
+    ports:
+      - "5432:5432"

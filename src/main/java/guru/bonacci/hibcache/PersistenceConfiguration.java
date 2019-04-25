@@ -59,6 +59,7 @@ public class PersistenceConfiguration {
     public PlatformTransactionManager transactionManager() {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+        
         return transactionManager;
     }
 
@@ -82,6 +83,10 @@ public class PersistenceConfiguration {
         hibernateProperties.setProperty("hibernate.cache.hazelcast.native_client_hosts", env.getProperty("hibernate.cache.hazelcast.native_client_hosts"));
         hibernateProperties.setProperty("hibernate.cache.hazelcast.native_client_group", env.getProperty("hibernate.cache.hazelcast.native_client_group"));
         hibernateProperties.setProperty("hibernate.cache.hazelcast.native_client_password", env.getProperty("hibernate.cache.hazelcast.native_client_password"));
+
+        hibernateProperties.setProperty("hibernate.temp.use_jdbc_metadata_defaults", "false");
+        hibernateProperties.setProperty("hibernate.jdbc.lob.non_contextual_creation", "true");
+        
         return hibernateProperties;
     }
 

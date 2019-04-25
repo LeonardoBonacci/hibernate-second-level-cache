@@ -7,7 +7,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @SpringBootApplication
 public class App {
 
@@ -15,29 +18,25 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
-    
-    
+       
     @Bean
     CommandLineRunner initialize(FooRepo repo) {
         return args -> {
             Stream.of("John", "Robert", "Nataly", "Helen", "Mary").forEach(bar -> {
-                repo.save(new Foo(bar));
+                log.info("inserted with id " + repo.save(new Foo(bar)).getId());
             });
-            repo.findAll().forEach(System.out::println);
             
-            
-            
-            Foo foo = new Foo();
+            Foo foo = new Foo("bbbbar");
             repo.save(foo);
-            System.out.println(foo.getId());
+            log.info("has id " + foo.getId());
 
-            // does not print query
-            System.out.println(repo.findById(foo.getId()).get());
-            System.out.println(repo.findById(foo.getId()).get());
+            log.info("should not print query");
+            log.info(""+repo.findById(foo.getId()).get());
+            log.info("did not print query");
 
-            // does print query
+            log.info("should print query");
             repo.findById(10l);
-
+            log.info("printed query");
         };
     }
     
