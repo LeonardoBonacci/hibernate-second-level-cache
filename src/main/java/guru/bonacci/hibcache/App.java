@@ -16,6 +16,7 @@ public class App {
     }
 
     
+    
     @Bean
     CommandLineRunner initialize(FooRepo repo) {
         return args -> {
@@ -23,6 +24,22 @@ public class App {
                 repo.save(new Foo(bar));
             });
             repo.findAll().forEach(System.out::println);
+            
+            
+            
+            Foo foo = new Foo();
+            repo.save(foo);
+            System.out.println(foo.getId());
+
+            // does not print query
+            System.out.println(repo.findById(foo.getId()).get());
+            System.out.println(repo.findById(foo.getId()).get());
+
+            // does print query
+            repo.findById(10l);
+
         };
-}
+    }
+    
+    
 }

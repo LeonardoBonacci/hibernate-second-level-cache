@@ -71,15 +71,17 @@ public class PersistenceConfiguration {
         final Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        hibernateProperties.setProperty("hibernate.cache.use_second_level_cache", env.getProperty("hibernate.cache.use_second_level_cache"));
+        hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        hibernateProperties.setProperty("hibernate.cache.use_query_cache", env.getProperty("hibernate.cache.use_query_cache"));
+        hibernateProperties.setProperty("hibernate.cache.use_minimal_puts", env.getProperty("hibernate.cache.use_minimal_puts"));
+        hibernateProperties.setProperty("hibernate.cache.region.factory_class", env.getProperty("hibernate.cache.region.factory_class"));
 
-        hibernateProperties.setProperty("hibernate.show_sql", "true");
-        // hibernateProperties.setProperty("hibernate.format_sql", "true");
-        // hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
-
-        // Envers properties
-        hibernateProperties.setProperty("org.hibernate.envers.audit_table_suffix",
-            env.getProperty("envers.audit_table_suffix"));
-
+        hibernateProperties.setProperty("hibernate.cache.hazelcast.use_native_client", env.getProperty("hibernate.cache.hazelcast.native_client_hosts"));
+        hibernateProperties.setProperty("hibernate.cache.hazelcast.native_client_hosts", env.getProperty("hibernate.cache.hazelcast.native_client_hosts"));
+        hibernateProperties.setProperty("hibernate.cache.hazelcast.native_client_group", env.getProperty("hibernate.cache.hazelcast.native_client_group"));
+        hibernateProperties.setProperty("hibernate.cache.hazelcast.native_client_password", env.getProperty("hibernate.cache.hazelcast.native_client_password"));
         return hibernateProperties;
     }
 
